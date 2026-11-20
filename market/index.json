@@ -1,0 +1,69 @@
+{
+    "format":  1,
+    "title":  {
+                  "en":  "Xiaoyu Market",
+                  "zh":  "小鱼市场"
+              },
+    "description":  {
+                        "en":  "Bundles made by LINYT1416 for DeepSeek Harness",
+                        "zh":  "LINYT1416 给 DeepSeek Harness 做的插件"
+                    },
+    "metadata":  {
+                     "categories":  {
+                                        "tools":  {
+                                                      "title":  {
+                                                                    "en":  "Tools",
+                                                                    "zh":  "工具"
+                                                                }
+                                                  }
+                                    },
+                     "labels":  {
+
+                                },
+                     "sortKeys":  {
+
+                                  }
+                 },
+    "plugins":  [
+                    {
+                        "name":  "dsh-memory-persona-affect",
+                        "title":  {
+                                      "en":  "Memory · Persona · Affect",
+                                      "zh":  "记忆 · 人格 · 心情"
+                                  },
+                        "description":  {
+                                            "en":  "Memory organs (hippocampus, cortex, prefrontal, amygdala), a six-organ affect curve, and a 50-mechanism persona, in one bundle.",
+                                            "zh":  "海马体-皮层-前额叶-杏仁核的记忆系统，六器官耦合的心情曲线，五十余机制的人格，一个包全装。"
+                                        },
+                        "author":  "LINYT1416",
+                        "homepage":  "https://github.com/LINYT1416/dsh-memory-persona-affect",
+                        "repository":  {
+                                           "url":  "https://github.com/LINYT1416/dsh-memory-persona-affect"
+                                       },
+                        "metadata":  {
+                                         "category":  "tools",
+                                         "keywords":  [
+                                                          "memory",
+                                                          "persona",
+                                                          "affect",
+                                                          "agent"
+                                                      ]
+                                     },
+                        "dist-tags":  {
+                                          "latest":  "2.0.6"
+                                      },
+                        "versions":  [
+                                         {
+                                             "version":  "2.0.6",
+                                             "publishTimestamp":  1795128168,
+                                             "source":  {
+                                                            "type":  "npm"
+                                                        },
+                                             "engines":  {
+                                                             "dsh":  "\u003e=0.2.2-rc.1 \u003c0.3.0"
+                                                         }
+                                         }
+                                     ]
+                    }
+                ]
+}
