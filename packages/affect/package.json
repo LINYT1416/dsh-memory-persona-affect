@@ -1,0 +1,39 @@
+{
+  "name": "dsh-affect",
+  "version": "1.0.0",
+  "description": "情绪内核：五器官（杏仁核/下丘脑/岛叶/海马体/前额叶皮层）+ 三层（调质/注意/社会）+ 四补充（脑干/默认模式/神经内分泌/病感）+ 时间与 IO，合成一个会自己起伏的心情。",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "core",
+    "organs",
+    "layers",
+    "supplements",
+    "time",
+    "io",
+    "cordis.patch.yml",
+    "STATUS.md"
+  ],
+  "scripts": {
+    "test": "node tests/selftest.mjs",
+    "coverage": "node tests/coverage.mjs"
+  },
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": ["@deepseek-ai/dsh-client-ui-settings"]
+    }
+  }
+}

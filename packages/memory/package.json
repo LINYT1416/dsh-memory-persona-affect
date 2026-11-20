@@ -1,0 +1,32 @@
+{
+  "name": "dsh-all",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "四器官记忆系统合并版：海马体 + 大脑皮层 + 前额叶 + 杏仁核，单入口启动。",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "organs",
+    "cordis.patch.yml",
+    "README.md",
+    "client.js",
+    "web"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  }
+}

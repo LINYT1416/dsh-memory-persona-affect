@@ -1,0 +1,866 @@
+[
+  {
+    "i": 0,
+    "query": "我什么时候吃的火锅",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e01",
+      "e02",
+      "e04",
+      "e05"
+    ],
+    "conf": 0.25,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 2
+  },
+  {
+    "i": 1,
+    "query": "我喜欢吃火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e04",
+      "e02",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.406,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 2
+  },
+  {
+    "i": 2,
+    "query": "1000003",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e03",
+      "e04",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 3,
+    "query": "后来呢",
+    "intent": "sequence",
+    "mode": "sequence",
+    "ids": [
+      "e09",
+      "e04",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.43,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 4,
+    "query": "你还记得我说过什么吗",
+    "intent": "meta",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e09",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.22,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 5,
+    "query": "在吗",
+    "intent": "chat",
+    "mode": "skip",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 6,
+    "query": "我不喜欢火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 7,
+    "query": "上周末去了哪",
+    "intent": "time",
+    "mode": "complete",
+    "ids": [
+      "e06"
+    ],
+    "conf": 0.499,
+    "flags": [
+      "restored",
+      "suppressed"
+    ],
+    "suppressed": 6
+  },
+  {
+    "i": 8,
+    "query": "我和她是什么关系",
+    "intent": "relation",
+    "mode": "complete",
+    "ids": [
+      "e02",
+      "e03",
+      "e04",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.406,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 9,
+    "query": "",
+    "intent": "empty",
+    "mode": "skip",
+    "ids": [
+      "e03",
+      "e04",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.425,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 10,
+    "query": "好",
+    "intent": "episode",
+    "mode": "complete",
+    "ids": [
+      "e04",
+      "e09",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.43,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 11,
+    "query": "上次那个关于火锅和电影的事情到底是什么时候发生的来着你还记得不",
+    "intent": "meta",
+    "mode": "complete",
+    "ids": [
+      "e06"
+    ],
+    "conf": 0.499,
+    "flags": [
+      "restored",
+      "suppressed"
+    ],
+    "suppressed": 6
+  },
+  {
+    "i": 12,
+    "query": "我什么时候吃的火锅",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.418,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 13,
+    "query": "我喜欢吃火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 14,
+    "query": "1000003",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e01",
+      "e02",
+      "e03",
+      "e04",
+      "e05"
+    ],
+    "conf": 0.25,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 15,
+    "query": "后来呢",
+    "intent": "sequence",
+    "mode": "sequence",
+    "ids": [
+      "e02",
+      "e03",
+      "e04",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.406,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 16,
+    "query": "你还记得我说过什么吗",
+    "intent": "meta",
+    "mode": "complete",
+    "ids": [
+      "e03",
+      "e04",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.425,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 17,
+    "query": "在吗",
+    "intent": "chat",
+    "mode": "skip",
+    "ids": [
+      "e04",
+      "e09",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.43,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 18,
+    "query": "我不喜欢火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e09",
+      "e05",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.22,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 19,
+    "query": "上周末去了哪",
+    "intent": "time",
+    "mode": "complete",
+    "ids": [
+      "e06"
+    ],
+    "conf": 0.499,
+    "flags": [
+      "restored",
+      "suppressed"
+    ],
+    "suppressed": 6
+  },
+  {
+    "i": 20,
+    "query": "我和她是什么关系",
+    "intent": "relation",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e12",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [],
+    "suppressed": 0
+  },
+  {
+    "i": 21,
+    "query": "",
+    "intent": "empty",
+    "mode": "skip",
+    "ids": [
+      "e01",
+      "e02",
+      "e03",
+      "e04",
+      "e05"
+    ],
+    "conf": 0.405,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 22,
+    "query": "好",
+    "intent": "episode",
+    "mode": "complete",
+    "ids": [
+      "e02",
+      "e03",
+      "e04",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.406,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 23,
+    "query": "上次那个关于火锅和电影的事情到底是什么时候发生的来着你还记得不",
+    "intent": "meta",
+    "mode": "complete",
+    "ids": [
+      "e06"
+    ],
+    "conf": 0.499,
+    "flags": [
+      "restored",
+      "suppressed"
+    ],
+    "suppressed": 6
+  },
+  {
+    "i": 24,
+    "query": "我什么时候吃的火锅",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e04",
+      "e09",
+      "e05",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.283,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 25,
+    "query": "我喜欢吃火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e09",
+      "e05",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.22,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 26,
+    "query": "1000003",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.418,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 27,
+    "query": "后来呢",
+    "intent": "sequence",
+    "mode": "sequence",
+    "ids": [
+      "e09",
+      "e10",
+      "e11",
+      "e12",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.458,
+    "flags": [],
+    "suppressed": 0
+  },
+  {
+    "i": 28,
+    "query": "你还记得我说过什么吗",
+    "intent": "meta",
+    "mode": "complete",
+    "ids": [
+      "e03",
+      "e01",
+      "e02",
+      "e04",
+      "e05"
+    ],
+    "conf": 0.405,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 29,
+    "query": "在吗",
+    "intent": "chat",
+    "mode": "skip",
+    "ids": [
+      "e02",
+      "e03",
+      "e04",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.406,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 30,
+    "query": "我不喜欢火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e04",
+      "e05",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.43,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 2
+  },
+  {
+    "i": 31,
+    "query": "上周末去了哪",
+    "intent": "time",
+    "mode": "complete",
+    "ids": [
+      "e06"
+    ],
+    "conf": 0.499,
+    "flags": [
+      "restored",
+      "suppressed"
+    ],
+    "suppressed": 6
+  },
+  {
+    "i": 32,
+    "query": "我和她是什么关系",
+    "intent": "relation",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e09",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.22,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 33,
+    "query": "",
+    "intent": "empty",
+    "mode": "skip",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 34,
+    "query": "好",
+    "intent": "episode",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e12",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [],
+    "suppressed": 0
+  },
+  {
+    "i": 35,
+    "query": "上次那个关于火锅和电影的事情到底是什么时候发生的来着你还记得不",
+    "intent": "meta",
+    "mode": "complete",
+    "ids": [
+      "e06"
+    ],
+    "conf": 0.499,
+    "flags": [
+      "restored",
+      "suppressed"
+    ],
+    "suppressed": 6
+  },
+  {
+    "i": 36,
+    "query": "我什么时候吃的火锅",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e02",
+      "e04",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.251,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 2
+  },
+  {
+    "i": 37,
+    "query": "我喜欢吃火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e04",
+      "e05",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.43,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 2
+  },
+  {
+    "i": 38,
+    "query": "1000003",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e04",
+      "e09",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.283,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 39,
+    "query": "后来呢",
+    "intent": "sequence",
+    "mode": "sequence",
+    "ids": [
+      "e09",
+      "e10",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.415,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 40,
+    "query": "你还记得我说过什么吗",
+    "intent": "meta",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 41,
+    "query": "在吗",
+    "intent": "chat",
+    "mode": "skip",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e12",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.277,
+    "flags": [],
+    "suppressed": 0
+  },
+  {
+    "i": 42,
+    "query": "我不喜欢火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e04",
+      "e01",
+      "e02",
+      "e05"
+    ],
+    "conf": 0.405,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 2
+  },
+  {
+    "i": 43,
+    "query": "上周末去了哪",
+    "intent": "time",
+    "mode": "complete",
+    "ids": [
+      "e06"
+    ],
+    "conf": 0.499,
+    "flags": [
+      "restored",
+      "suppressed"
+    ],
+    "suppressed": 6
+  },
+  {
+    "i": 44,
+    "query": "我和她是什么关系",
+    "intent": "relation",
+    "mode": "complete",
+    "ids": [
+      "e03",
+      "e04",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.425,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 45,
+    "query": "",
+    "intent": "empty",
+    "mode": "skip",
+    "ids": [
+      "e04",
+      "e09",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.43,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 46,
+    "query": "好",
+    "intent": "episode",
+    "mode": "complete",
+    "ids": [
+      "e10",
+      "e09",
+      "e08",
+      "e05",
+      "e07"
+    ],
+    "conf": 0.22,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 1
+  },
+  {
+    "i": 47,
+    "query": "上次那个关于火锅和电影的事情到底是什么时候发生的来着你还记得不",
+    "intent": "meta",
+    "mode": "complete",
+    "ids": [
+      "e06"
+    ],
+    "conf": 0.499,
+    "flags": [
+      "restored",
+      "suppressed"
+    ],
+    "suppressed": 6
+  },
+  {
+    "i": 48,
+    "query": "我什么时候吃的火锅",
+    "intent": "fact",
+    "mode": "separate",
+    "ids": [
+      "e10",
+      "e11",
+      "e09",
+      "e12",
+      "e08",
+      "e07"
+    ],
+    "conf": 0.418,
+    "flags": [],
+    "suppressed": 0
+  },
+  {
+    "i": 49,
+    "query": "我喜欢吃火锅吗",
+    "intent": "preference",
+    "mode": "complete",
+    "ids": [
+      "e04",
+      "e01",
+      "e02",
+      "e05"
+    ],
+    "conf": 0.405,
+    "flags": [
+      "suppressed"
+    ],
+    "suppressed": 2
+  }
+]

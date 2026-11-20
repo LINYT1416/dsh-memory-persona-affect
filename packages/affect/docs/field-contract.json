@@ -1,0 +1,95 @@
+{
+ "meta": {
+  "plannedBudget": 0
+ },
+ "fields": {
+  "hypothalamus.rhythm.thresholdShift": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "insula.memoryReplay": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.display.rules": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.attribution.stability": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.attribution.globality": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.attribution.blame": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.reappraisal.strategy": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.reappraisal.cost": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.decision.speak": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.decision.yield": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.decision.hold": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "pfc.theoryOfMind": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "io.voice.rate": {
+   "status": "internal",
+   "why": "留给语音通道（TTS 还没接）；算出来是给未来的，不是欠账"
+  },
+  "io.voice.volume": {
+   "status": "internal",
+   "why": "留给语音通道（TTS 还没接）"
+  },
+  "amygdala.context.home": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "amygdala.threshold": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "amygdala.deepTags": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "amygdala.retainDays": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "insula.intero.hrv": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "insula.intero.gut": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "insula.irritation": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  },
+  "hippocampus.persons.他.likes": {
+   "status": "internal",
+   "why": "内部状态量：参与自身推算/持久化，或给 dashboard 观察；不进注入文本（进了就把内心活动写成说明书）"
+  }
+ }
+}

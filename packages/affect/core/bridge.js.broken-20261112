@@ -1,0 +1,393 @@
+﻿// 璁板繂妗ワ細鎯呯华鍐呮牳鍙鍥涗釜璁板繂鍣ㄥ畼锛岀粷涓嶅啓瀹冧滑鐨勫簱銆?import { mkdirSync, appendFileSync, existsSync, readFileSync, writeFileSync, renameSync } from 'node:fs'
+import { join } from 'node:path'
+import { homedir } from 'node:os'//   memory.cortex      浜嬪疄 / 姒傚康
+//   memory.hippocampus 鎯呰妭 / 鍘熸枃
+//   memory.prefrontal  鍒ゆ柇 / 璁″垝锛堝彧璇诲垽鏂紝涓嶅啓锛?//   memory.amygdala    鏄捐憲鎬?/ 璐熸€у叧鑱?// 浠讳綍涓€涓笉鍦紝灏辫繑鍥?null锛屾儏缁収璺戙€?
+export function createBridge(get) {  const safe = (fn, fallback = null) => {
+    try { return fn() ?? fallback } catch { return fallback }
+  }
+  const organ = (id) => safe(() => get(id), null)
+  let lastFast = null   // 鏈€杩戜竴娆″悓姝ュ彫鍥炵殑璇婃柇锛氭病鎺ヤ笂鏃堕潬瀹冨畾浣嶆槸鍗″湪鍝竴姝?
+  return {
+    ready: () => ['memory.cortex', 'memory.hippocampus', 'memory.prefrontal', 'memory.amygdala'].some(id => !!organ(id)),
+
+    /** 杩欎欢浜嬩互鍓嶅彂鐢熻繃鍚楋細杩斿洖 {hits:[{brief,valence}], tone} */
+    recall(text) {
+      const hip = organ('memory.hippocampus')
+      if (!hip || typeof hip !== 'object') return null
+      const r = safe(() => hip.recall?.(String(text || '').slice(0, 200)), null)
+      // 鐪熷疄娴烽┈浣撶殑杩斿洖鍙兘鏄暟缁勩€亄hits}銆亄episodes}銆亄results}锛岄兘鍏煎
+      const list = Array.isArray(r) ? r
+        : Array.isArray(r?.hits) ? r.hits
+          : Array.isArray(r?.episodes) ? r.episodes
+            : Array.isArray(r?.results) ? r.results
+              : r ? [r] : []
+      if (!list.length) return null
+      const hits = list.slice(0, 3).map(x => ({
+        brief: String(x?.summary ?? x?.text ?? x?.title ?? x?.why ?? '').slice(0, 24),
+        valence: Number(x?.valence ?? x?.emotion?.valence ?? x?.tone ?? 0) || 0,
+        kind: x?.emotion?.kind ?? x?.kind ?? null,
+      })).filter(h => h.brief)
+      if (!hits.length) return null
+      const tone = hits.reduce((s, h) => s + h.valence, 0) / hits.length
+      return { hits, tone }
+    },
+
+    /** 浜嬪疄锛氬ス璁板緱鍏充簬杩欎欢浜?杩欎釜浜虹殑浜嬪疄 */
+    facts(text) {
+      const c = organ('memory.cortex')
+      if (!c) return null
+      const r = safe(() => c.search?.(String(text || '').slice(0, 100)), null)
+      const list = Array.isArray(r) ? r : Array.isArray(r?.hits) ? r.hits : []
+      return list.length ? list.slice(0, 3).map(x => String(x?.text ?? x?.summary ?? '').slice(0, 30)) : null
+    },
+
+    /** 璁板繂渚х殑鏄捐憲鎬у厛楠岋紙0~1锛?*/
+    salience(text) {
+      const a = organ('memory.amygdala')
+      if (!a) return null
+      const s = safe(() => a.salience?.(String(text || '').slice(0, 200)), null)
+      const v = typeof s === 'number' ? s : Number(s?.score)
+      return Number.isFinite(v) ? Math.max(0, Math.min(1, v)) : null
+    },
+
+    /** 杩欐瀵硅瘽鍦ㄥス璁板繂閲岀殑璐熼潰鍏宠仈 */
+    caution(subject) {
+      const a = organ('memory.amygdala')
+      if (!a) return null
+      const c = safe(() => a.caution?.(String(subject || '')), null)
+      const level = typeof c === 'number' ? c : Number(c?.level)
+      return Number.isFinite(level) ? Math.max(0, Math.min(1, level)) : null
+    },
+
+    /** 璇婃柇锛氬洓涓櫒瀹樺湪涓嶅湪銆佹柟娉曟湁娌℃湁銆乺ecall 鐪熷疄杩斿洖闀夸粈涔堟牱 */
+    status() {
+      const ids = ['memory.cortex', 'memory.hippocampus', 'memory.prefrontal', 'memory.amygdala']
+      const out = {}
+      for (const id of ids) {
+        const o = organ(id)
+        out[id.replace('memory.', '')] = o
+          ? { ok: true, recall: typeof o.recall === 'function', episodes: typeof o.episodes === 'function', write: typeof o.write === 'function', salience: typeof o.salience === 'function', search: typeof o.search === 'function', caution: typeof o.caution === 'function' }
+          : { ok: false }
+      }
+      return out
+    },
+
+    /** 璇婃柇锛氬師鏍风湅涓€娆?recall锛屼笉鐚滃舰鐘?*/
+    debugRecall(text) {
+      const hip = organ('memory.hippocampus')
+      if (!hip || typeof hip.recall !== 'function') return { error: 'no recall' }
+      try {
+        const raw = hip.recall?.(String(text || '').slice(0, 100))
+        const json = JSON.stringify(raw)
+        return { type: Array.isArray(raw) ? 'array' : typeof raw, preview: String(json || '').slice(0, 500) }
+      } catch (e) { return { error: String(e?.message || e) } }
+    },
+
+    /** 鏈€杩戝嚑灏忔椂璁板繂閲屽彂鐢熻繃浠€涔堬紙鍙 episodes锛屼笉鐢?recall 涔熻兘鎷垮埌涓婁笅鏂囷級 */
+    async recentEpisodes(hours = 6, limit = 5) {
+      const hip = organ('memory.hippocampus')
+      if (!hip || typeof hip.episodes !== 'function') return null
+      const since = Date.now() - hours * 3600_000
+      // 鐪熷疄娴烽┈浣撶殑 episodes() 鏄?async锛屽繀椤?await
+      const list = await Promise.resolve().then(() => hip.episodes({ since, limit })).catch(() => null)
+      const arr = Array.isArray(list) ? list : list?.episodes
+      if (!Array.isArray(arr) || !arr.length) return null
+      return arr.slice(-limit).map(e => ({
+        brief: String(e.summary ?? e.text ?? '').slice(0, 30),
+        at: e.at ?? e.start,
+        salience: Number(e.salience) || 0,
+      })).filter(x => x.brief)
+    },
+
+    /** 鑳藉姏鎺㈡祴锛氬悓姝ュ彫鍥炲埌搴曟湁娌℃湁鎺ヤ笂锛堟湁灏卞悓鎷嶏紝娌℃湁灏遍€€鍥炲紓姝ワ級 */
+    capabilities() {
+      const hip = organ('memory.hippocampus')
+      if (!hip) return { ok: false, recallSync: false }
+      let keys = []
+      try { keys = Object.keys(hip).filter(k => typeof hip[k] === 'function').slice(0, 24) } catch { /* 浠ｇ悊瀵硅薄鍙兘涓嶇粰 keys */ }
+      return {
+        ok: true,
+        recallSync: typeof hip.recallSync === 'function',
+        recallAsync: typeof hip.recallAsync === 'function',
+        recall: typeof hip.recall === 'function',
+        episodes: typeof hip.episodes === 'function',
+        write: typeof hip.write === 'function',
+        methods: keys,
+        lastFast,
+      }
+    },
+
+    /** 鍙鎺㈡祴锛氫笉褰卞搷 lastFast锛堣瘖鏂矾鐢辩敤瀹冿紝鍏嶅緱鎶婄湡瀹為偅鎷嶇殑缁撹瑕嗙洊鎺夛級 */
+    probe(text, opts = {}) {
+      const hip = organ('memory.hippocampus')
+      if (!hip || typeof hip.recallSync !== 'function') return { stage: 'no-method', hits: [] }
+      let r = null
+      try { r = hip.recallSync(String(text || '').slice(0, 200), { valence: Number(opts.valence) || 0, arousal: Number(opts.arousal) || 0, limit: 3 }) } catch (e) { return { stage: 'threw', error: String(e?.message || e), hits: [] } }
+      if (!r) return { stage: 'null-result', hits: [] }
+      if (r.ok === false) return { stage: 'ok-false', reason: String(r.reason || ''), hits: [] }
+      const list = Array.isArray(r) ? r : Array.isArray(r.hits) ? r.hits : []
+      const hits = list.slice(0, 3).map(x => ({
+        id: x?.id ?? x?.episodeId ?? null,
+        brief: String(x?.brief ?? x?.summary ?? x?.text ?? '').replace(/\s+/g, ' ').slice(0, 24),
+        valence: Number(x?.valence) || 0,
+        salience: Number(x?.salience) || 0,
+        score: Number(x?.score) || 0,
+      })).filter(h => h.brief)
+      return { stage: hits.length ? 'ok' : 'empty-hits', hits, degraded: !!r.degraded, valenceReady: !!r.valenceReady }
+    },
+
+    /** 闀挎湡缁熻锛氱粰浜烘牸灞傜湅鐨勮仛鍚堥噺锛堝彧鏈夎鏁?鍧囧€硷紝娌℃湁鍘熻瘽锛?*/
+    /** 璁板繂渚х殑闀挎湡鎯呯华缁熻锛堝洓鍣ㄥ畼 hippocampus.moodTrend锛夈€傛病鏈夊氨 null锛屼笉缂栥€?*/
+    memoryTrend(days = 7) {
+      const hip = organ('memory.hippocampus')
+      if (!hip || typeof hip.moodTrend !== 'function') return null
+      try {
+        return hip.moodTrend({ days: Math.max(1, Math.min(365, Number(days) || 7)) })
+      } catch { return null }
+    },
+
+    stats(days = 7) {
+      const out = { days, n: 0, byKind: {}, valenceMean: 0, intensityMean: 0, deepShare: 0, moodMean: 0, lastAt: null }
+      try {
+        const home = process.env.DSH_HOME || join(homedir(), '.dsh')
+        const p = join(home, 'affect', 'memory-notes.jsonl')
+        if (!existsSync(p)) return out
+        const since = Date.now() - days * 86400_000
+        const rows = readFileSync(p, 'utf8').split('\n').filter(Boolean).slice(-2000)
+          .map(l => { try { return JSON.parse(l.replace(/^\uFEFF/, '')) } catch { return null } })
+          .filter(x => {
+            if (!x) return false
+            if (!x.at) return true
+            const t = Date.parse(x.at)
+            return Number.isNaN(t) ? true : t >= since   // 鏃堕棿鎴宠В鏋愪笉浜嗗氨褰撳畠灞炰簬绐楀彛锛屽埆涓㈡牱鏈?          })
+        if (!rows.length) return out
+        let v = 0, i = 0, m = 0, deep = 0, invalid = 0, unnamed = 0, usable = 0
+        const byDay = new Map()
+        for (const r of rows) {
+          const kind = String(r.kind || '').trim()
+          // 鍗曞瓧姣?绾暟瀛楃殑鍒嗙被鏄剰鏁版嵁锛堟棭鏈熸祴璇曞啓杩涙潵鐨勶級锛屼笉璁″叆浜烘牸鍙鐨勭粺璁?          if (!kind || /^[a-z0-9]{1,2}$/i.test(kind)) { invalid += 1; continue }
+          if (r.named === false || kind === '鏈夋儏缁?) { unnamed += 1 } else { out.byKind[kind] = (out.byKind[kind] || 0) + 1 }
+          v += Number(r.valence) || 0
+          i += Number(r.intensity) || 0
+          m += Number(r.mood) || 0
+          if (r.depth === 'deep') deep += 1
+          usable += 1
+          // 鎸夊ぉ鍒嗘《锛氫汉鏍煎眰瑕佽兘鐪嬪嚭"鍝嚑澶╁ス浣庤惤"锛屼笉鑳藉彧鏈変竴涓€诲潎鍊?          const t = Date.parse(r.at)
+          if (!Number.isNaN(t)) {
+            const d = new Date(t)
+            const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+            const cell = byDay.get(key) || { day: key, n: 0, sum: 0, deep: 0 }
+            cell.n += 1
+            cell.sum += Number(r.valence) || 0
+            if (r.depth === 'deep') cell.deep += 1
+            byDay.set(key, cell)
+          }
+          if (!out.lastAt || (r.at && r.at > out.lastAt)) out.lastAt = r.at || out.lastAt
+        }
+        out.byDay = [...byDay.values()]
+          .sort((a, b) => a.day.localeCompare(b.day))
+          .map(c => ({ day: c.day, n: c.n, valenceMean: Number((c.sum / c.n).toFixed(3)), deep: c.deep }))
+        out.n = usable
+        out.invalid = invalid
+        out.unnamed = unnamed
+        out.valenceMean = Number((v / Math.max(1, usable)).toFixed(3))
+        out.intensityMean = Number((i / Math.max(1, usable)).toFixed(3))
+        out.moodMean = Number((m / Math.max(1, usable)).toFixed(3))
+        out.deepShare = Number((deep / Math.max(1, usable)).toFixed(3))
+      } catch { /* 璇讳笉鍒板氨缁欑┖缁熻 */ }
+      return out
+    },
+
+    /** 鎶婅剰鏍锋湰锛堝崟瀛楁瘝/绌?kind/鍧?JSON锛夋尓鍘诲綊妗ｆ枃浠讹紝鍘熸枃浠跺彧鐣欏共鍑€琛岋紱涓嶇墿鐞嗗垹 */
+    archiveInvalid() {
+      try {
+        const home = process.env.DSH_HOME || join(homedir(), '.dsh')
+        const p = join(home, 'affect', 'memory-notes.jsonl')
+        if (!existsSync(p)) return { ok: true, moved: 0, kept: 0 }
+        const lines = readFileSync(p, 'utf8').split('\n').filter(l => l.trim())
+        const good = []
+        const bad = []
+        for (const l of lines) {
+          let o = null
+          try { o = JSON.parse(l.replace(/^\uFEFF/, '')) } catch { o = null }
+          const kind = String(o?.kind ?? '').trim()
+          if (!o || !kind || /^[a-z0-9]{1,2}$/i.test(kind)) bad.push(l)
+          else good.push(l)
+        }
+        if (!bad.length) return { ok: true, moved: 0, kept: good.length }
+        const arch = join(home, 'affect', 'memory-notes.invalid.jsonl')
+        appendFileSync(arch, bad.join('\n') + '\n', 'utf8')
+        const tmp = p + '.tmp'
+        writeFileSync(tmp, good.length ? good.join('\n') + '\n' : '', 'utf8')
+        renameSync(tmp, p)
+        return { ok: true, moved: bad.length, kept: good.length, archive: arch }
+      } catch (e) {
+        return { ok: false, error: String(e?.message || e) }
+      }
+    },
+
+    /** 鏈€杩戜竴娆″悓姝ュ彫鍥炵殑缁撹锛坋ngine 鐢ㄥ畠鍐冲畾瑕佷笉瑕侀€€鍥炲紓姝ワ級 */
+    fastStage() { return lastFast?.stage || null },
+
+    /** 鍚屾绮楀彫鍥烇細璁板繂渚ф湁 recallSync 灏辩敤瀹冿紙BM25/鍥?姒傚康锛屾绉掔骇锛夛紝娌℃湁灏辫繑鍥?null 鐢辫皟鐢ㄦ柟閫€鍥炲紓姝?*/
+    recallFast(text, opts = {}) {
+      const diag = (stage, extra = {}) => { lastFast = { at: Date.now(), stage, ...extra } }
+      const hip = organ('memory.hippocampus')
+      if (!hip) { diag('no-organ'); return null }
+      if (typeof hip.recallSync !== 'function') { diag('no-method'); return null }
+      let r = null
+      try {
+        r = hip.recallSync(String(text || '').slice(0, 200), {
+          valence: Number(opts.valence) || 0,
+          arousal: Number(opts.arousal) || 0,
+          limit: 3,
+          // 鍐欒鍏堝悗锛氭妸褰撳墠杩欐潯娑堟伅鎺掗櫎鎺夛紝鍚﹀垯鍙洖鐨勬槸"涓婁竴鍙ョ殑涓婁笅鏂?
+          excludeMsgId: opts.excludeMsgId || null,
+          beforeMs: opts.beforeMs || null,
+        })
+      } catch (e) { diag('threw', { error: String(e && e.message || e) }); return null }
+      if (!r) { diag('null-result'); return null }
+      if (r.ok === false) { diag('ok-false', { reason: String(r.reason || '') }); return null }
+      const list = Array.isArray(r) ? r : Array.isArray(r.hits) ? r.hits : []
+      const hits = list.slice(0, 3).map(x => ({
+        id: x?.id ?? x?.episodeId ?? null,
+        brief: String(x?.brief ?? x?.summary ?? x?.text ?? '').replace(/\s+/g, ' ').slice(0, 24),
+        // 璁板繂渚цˉ valence 涔嬪墠鍏堢粰 0锛屽苟闈?valenceReady 鍛婅瘔鎴戣兘涓嶈兘鐢?        valence: Number(x?.valence) || 0,
+        salience: Number(x?.salience) || 0,
+        at: x?.at ?? null,
+        score: Number(x?.score) || 0,
+      })).filter(h => h.brief)
+      if (!hits.length) { diag('empty-hits', { raw: list.length }); return null }
+      diag('ok', { n: hits.length, degraded: !!(r.degraded ?? r.flags?.degraded), ms: r.ms ?? null })
+      return {
+        hits,
+        degraded: !!(r.degraded ?? r.flags?.degraded),
+        valenceReady: !!(r.valenceReady ?? r.flags?.valenceReady),
+      }
+    },
+
+    /** 鎴戣嚜宸辩殑鏁堜环璐︽湰锛歩d 鈫?valence锛堣蹇嗕晶杩樻病琛ュ瓧娈垫椂锛岀敤瀹冨厛鎶婂績澧冧竴鑷存€ц窇璧锋潵锛?*/
+    notesLedger() {
+      const map = new Map()
+      try {
+        const home = process.env.DSH_HOME || join(homedir(), '.dsh')
+        const p = join(home, 'affect', 'memory-notes.jsonl')
+        if (!existsSync(p)) return map
+        const lines = readFileSync(p, 'utf8').split('\n').filter(Boolean).slice(-500)
+        for (const line of lines) {
+          try {
+            const n = JSON.parse(line.replace(/^\uFEFF/, ''))
+            const v = Number(n.valence) || 0
+            if (n.id) map.set(String(n.id), v)
+            else if (n.brief) map.set('b:' + String(n.brief).slice(0, 20), v)
+          } catch { /* 鍗曡鍧忎笉褰卞搷鍏朵粬 */ }
+        }
+      } catch { /* 璇讳笉鍒板氨绌鸿处鏈?*/ }
+      return map
+    },
+
+    /** 蹇冨涓€鑷存€ч噸鎺掞細浣庤惤鏃跺厛鎯宠捣绯熷績浜嬶紙鍚屽彿鏁堜环鍔犲垎锛夛紝鍙敤鑳芥嬁鍒扮殑鏁堜环 */
+    moodRerank(hits, moodValence, opts = {}) {
+      if (!Array.isArray(hits) || !hits.length) return []
+      const ledger = opts.ledger || this.notesLedger()
+      const v0 = Number(moodValence) || 0
+      // 涓庤蹇嗕晶鍏紡瀵归綈锛歴core += w * max(0, 蹇冩儏 * 鏉＄洰鏁堜环)锛寃 = 0.15 / 闄嶇骇鏃?0.075
+      const w = opts.degraded ? 0.075 : 0.15
+      return hits.map(h => {
+        let ev = Number(h.valence) || 0
+        if (!ev) ev = Number(ledger.get(String(h.id))) || Number(ledger.get('b:' + String(h.brief).slice(0, 20))) || 0
+        const bonus = w * Math.max(0, ev * v0)
+        return { ...h, valence: ev, score: (Number(h.score) || Number(h.salience) || 0) + bonus }
+      }).sort((a, b) => b.score - a.score)
+    },
+
+    /** 寮傛鐗?recall锛氱湡娴烽┈浣撶殑 recall 鏄?Promise锛屽悓姝ユ嬁鍙細鎷垮埌涓€涓?Promise */
+    async recallAsync(text) {
+      const hip = organ('memory.hippocampus')
+      if (!hip || typeof hip.recall !== 'function') return null
+      if (typeof hip.recallAsync === 'function') {
+        return await Promise.resolve().then(() => hip.recallAsync(text)).catch(() => null)
+      }
+      const r = await Promise.resolve().then(() => hip.recall(String(text || '').slice(0, 200))).catch(() => null)
+      const list = Array.isArray(r) ? r
+        : Array.isArray(r?.hits) ? r.hits
+          : Array.isArray(r?.episodes) ? r.episodes
+            : Array.isArray(r?.results) ? r.results
+              : r ? [r] : []
+      if (!list.length) return null
+      const hits = list.slice(0, 3).map(x => ({
+        brief: String(x?.summary ?? x?.text ?? x?.title ?? x?.why ?? '').slice(0, 24),
+        valence: Number(x?.valence ?? x?.emotion?.valence ?? x?.tone ?? 0) || 0,
+        kind: x?.emotion?.kind ?? x?.kind ?? null,
+      })).filter(h => h.brief)
+      if (!hits.length) return null
+      const tone = hits.reduce((s, h) => s + h.valence, 0) / hits.length
+      return { hits, tone }
+    },
+
+    /** 鎶?閭ｆ鎴戝緢闅惧彈"鍐欏洖璁板繂锛氫紭鍏堣蹇嗕晶 write锛屽け璐ュ氨钀藉湪鑷繁鐨勬湰瀛愰噷锛堝彧杩藉姞锛?*/
+    annotate(note = {}, sessionId = '', mood = null) {
+      const payload = {
+        at: new Date().toISOString(),
+        // 甯︿笂 episode id锛氳蹇嗕晶琛?valence 涔嬪墠锛岄潬瀹冭窡鎴戠殑璐︽湰 join
+        id: note.id ? String(note.id) : null,
+        kind: String(note.kind ?? ''),
+        // 杩欏彞鎯呯华鏈夋病鏈?鍚嶅瓧"锛氳涓嶅嚭鍚嶅瓧涔熻璁帮紝浣嗙粺璁℃椂涓嶈兘娣疯繘鍒嗙被璁℃暟
+        named: Boolean(String(note.kind ?? '').trim()),
+        valence: Number(note.valence) || 0,
+        intensity: Number(note.intensity) || 0,
+        depth: String(note.depth ?? 'normal'),
+        mood: Number(note.mood) || 0,
+        brief: String(note.brief ?? '').slice(0, 40),
+      }
+      let wrote = false
+      let memoryWrote = false // 鍗曠嫭鏍囧嚭鏉ワ細wrote 涔熷寘鍚?鍙啓杩涙湰鍦版湰瀛?锛岃皟鐢ㄦ柟甯告妸涓よ€呮悶娣?      let wroteDone = Promise.resolve(null)
+      // 鎯呯华鍚嶇己澶卞氨鐢ㄥ厹搴曪紝涓嶈鏁存潯涓㈡帀锛?      // "杩欎欢浜嬭鎴戜粈涔堟劅瑙?鍗充娇璇翠笉鍑哄悕瀛椾篃璇ヨ浣忥紝涓簡鎵嶆槸鐪熶涪銆?      if (!String(payload.kind).trim()) payload.kind = '鏈夋儏缁?
+      const hip = organ('memory.hippocampus')
+      if (hip && typeof hip.write === 'function') {
+        // 浼氳瘽蹇呴』璺熺潃鐪熷疄閭ｆ潯娑堟伅璧帮細鍐欐鎴?'affect' 鐨勮瘽锛?        // 杩欐潯璁板繂浼氭寕鍒颁竴涓笉瀛樺湪鐨勪細璇濅笂锛屽綋鍓嶄細璇濈殑娉ㄥ叆鍜屾绱㈤兘鐪嬩笉瑙佸畠銆?        const sid = String(sessionId || note.session || '')
+        const input = {
+          text: `銆愭儏缁€?{payload.kind || '鏈夋儏缁?}锛?{payload.brief}`,
+          role: 'assistant',
+          // 璁板繂渚т袱绉嶉兘璁わ細椤跺眰 valence 鎴?meta.valence锛岃繖閲岄兘缁?          valence: payload.valence,
+          meta: payload,
+          // 鎯呯华鍐欏洖涓嶈兘琚樉钁楁€ч棬妲涙尅鎺夛細鎸℃帀鐨勮瘽"杩欎欢浜嬭鎴戜粈涔堟劅瑙?姘歌繙杩涗笉浜嗗簱锛?          // episodeId 浼氭槸 null锛屾暣鏉¤蹇嗘棤澹版秷澶便€?          force: true,
+          // 涔熶笉鍙備笌鍚屾鍚堝苟锛氬悎骞朵細杩斿洖鐢ㄦ埛娑堟伅閭ｆ潯鐨?id锛寁alence 灏变涪浜嗐€?          // 銆岃繖浠朵簨璁╂垜浠€涔堟劅瑙夈€嶆湰鏉ュ氨璇ユ槸鐙珛涓€鏉°€?          bypass: true,
+        }
+        if (sid) input.session = sid
+        // 鎶婂綋鏃剁殑蹇冩儏涔熷甫杩囧幓锛氳蹇嗕晶鎹璁?浣庤胺閲岃寰楁洿娣?鐪熺殑鍙戠敓
+        const m = Number(mood)
+        if (Number.isFinite(m)) input.mood = m
+        try {
+          const r = hip.write(input)
+          // write 鏄?async锛氫笉 await 浼氬悶鎺夋嫆缁濓紝浣嗚鎺ヤ綇锛屽埆鍙樻垚鏈鐞嗙殑 rejection
+          if (r && typeof r.catch === 'function') r.catch(() => {})
+          wrote = true
+          memoryWrote = true
+          wroteDone = r && typeof r.then === 'function' ? r : Promise.resolve(null)
+        } catch { /* 褰㈢姸涓嶅灏辫惤鍒版湰鍦?*/ }
+      }
+      try {
+        const home = process.env.DSH_HOME || join(homedir(), '.dsh')
+        const dir = join(home, 'affect')
+        mkdirSync(dir, { recursive: true })
+        const file = join(dir, 'memory-notes.jsonl')
+        // 涓婁竴琛屾病鏈夋崲琛岀粨灏炬椂琛ヤ竴涓紝鍚﹀垯鏂拌褰曚細绮樺湪鏃ц褰曚笂鍙樻垚涓€琛屽簾 JSON
+        let prefix = ''
+        try {
+          const st = readFileSync(file)
+          if (st.length && st[st.length - 1] !== 0x0a) prefix = '\n'
+        } catch { /* 鏂囦欢杩樹笉瀛樺湪 */ }
+        appendFileSync(file, prefix + JSON.stringify(payload) + '\n', 'utf8')
+        wrote = true   // 钀借繘鑷繁鏈瓙涔熺畻鍐欎笅鏉ヤ簡锛屼笉鐒惰皟鐢ㄦ柟浠ヤ负鏁存潯涓簡
+      } catch { /* 鏈湴涔熷啓涓嶄簡灏辩畻浜?*/ }
+      return { wrote, memoryWrote, payload, done: wroteDone }
+    },
+
+    /** 鎯呯华鏀跺熬鏃堕€氱煡璁板繂渚э紙鍙彂浜嬩欢锛岀敱瀹冨喅瀹氳涓嶈锛?*/
+    announce(payload, emit) {
+      try { emit?.('affect.episode.closed', payload) } catch { /* 娌′汉鍚氨绠椾簡 */ }
+    },
+  }
+}

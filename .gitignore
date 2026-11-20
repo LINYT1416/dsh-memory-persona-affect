@@ -1,0 +1,10 @@
+node_modules/
+*.log
+*.bak
+*.bak-*
+data/
+state.json
+identity.json
+interlocutor.json
+storyline.json
+*.jsonl

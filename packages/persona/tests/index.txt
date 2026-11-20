@@ -1,0 +1,173 @@
+core\air.js                    20 行  SERIOUS@3  VENTING@4  ANGRY@5  PLAYFUL@6  readAir@11
+core\audit.js                  69 行  PAIRS@7  detectConflicts@31  createConflictLog@43  note@51
+core\autobio.js                43 行  biography@8
+core\avoid.js                  31 行  decideAvoid@10
+core\aware.js                  31 行  observeSelf@9
+core\bias.js                   43 行  biasOf@6
+core\blame.js                  31 行  attribute@9
+core\boundary.js               37 行  LEVELS@4  boundaryOf@15
+core\budget.js                 38 行  speechBudget@9
+core\consistency.js            42 行  WINDOW@4  createConsistency@6  say@14
+core\consts.js                 67 行  VERSION@3  hash@10  features@27  cueOf@48  smellsOff@60
+core\contagion.js              25 行  SHIFTS@4  contagion@16
+core\coverage.js               60 行  REF@10  REF_OPT@11  REF_BIAS@12  scanWired@14  readSources@33  coverage@42
+core\crave.js                  57 行  TOPICS@4  WINDOW@12  THRESHOLD@13  COOLDOWN@14  createCrave@16  note@19  line@35
+core\cute.js                   41 行  COOLDOWN@3  decideCute@10  createCuteState@29
+core\deceive.js                45 行  rationalize@10
+core\degrade.js                41 行  DAY@4  retire@10  degrade@33
+core\deny.js                   29 行  ASK_FEAR@5  WEAK@6  denyFear@13  DENIAL_LINES@28
+core\desc.js                  201 行  RULES@8  SAFE@60  INTERACTIONS@71  ORGAN_OF@96  PHRASE@107  describe@117  dump@185
+core\efficacy.js               24 行  SMOOTH@3  efficacyOf@9
+core\empathy.js                27 行  empathy@9
+core\engine.js                352 行  ORDER_A@19  ORDER_B@20  DEFAULTS@22  SPECS@32  TICK_MS@39  SLOW_MS@40  createEngine@44  readAll@89  stepOne@95  fuse@117  slow@151  tick@183  setUserBias@350  getUserBias@351
+core\explain.js                39 行  explainStyle@9  nostalgia@26
+core\expression.js             21 行  FORMAL@3  expressionRule@10
+core\goal.js                   72 行  HOUR@3  INTENT@6  DONE@7  FAILED@8  createGoals@10  note@19  line@45
+core\habit.js                  45 行  WINDOW_DAYS@4  MIN_DAYS@5  DAY@6  DECAY_DAYS@7  createHabit@11  note@14  isHabit@27  line@34
+core\humor.js                  40 行  SELF@5  TEASE@10  humor@20
+core\ideal.js                  21 行  idealGap@8
+core\identity.js               35 行  FIELDS@6  loadIdentity@18  IDENTITY_FIELDS@34
+core\integrate.js              54 行  NEG@3  fuse@12
+core\interlocutor.js           31 行  WHO_Q@4  loadInterlocutor@6  answerWho@24  WHO_QUESTION@30
+core\keyperiod.js              43 行  WINDOW@4  THRESHOLD@5  FADE@6  createKeyPeriod@8  note@14  active@25  line@30
+core\leak.js                   29 行  leak@9
+core\legacy.js                 41 行  WINDOW_DAYS@2  FADE_DAYS@3  createLegacy@5  hurt@9  forgive@21  line@27
+core\lexicon.js                35 行  PARTICLES@5  BANNED_LIST@6  lexicon@12
+core\looks.js                  27 行  LOOKS@3  looksBias@14  looksLine@23
+core\maintenance.js            26 行  EVERY_MS@3  IDLE_MS@4  maintain@11
+core\major-event.js            37 行  createMajorEvent@3  hit@14  line@22
+core\mindread.js               16 行  CUE@2  mindread@8
+core\motive.js                 23 行  WHY@4  opaqueMotive@10
+core\ostracism.js              56 行  createOstracism@2  beat@14  idleBeat@33
+core\possess.js                60 行  OTHER@4  WARM_ABOUT_OTHER@5  COOLDOWN@6  createPossess@11  note@19  decay@31  line@37
+core\posture.js                31 行  GESTURES@4  posture@16
+core\privacy.js                27 行  PRIVATE@2  privacy@14
+core\project.js                31 行  project@10
+core\quench.js                 36 行  QUENCH@4  plasticity@8  touch@13  addShock@20  decayShock@26  blankMeta@33
+core\reciprocity.js            39 行  createReciprocity@2  receive@9  repay@16  line@23  snapshot@30  restore@31
+core\relation.js               60 行  DAY@3  CUES@6  createRelation@14  note@28  line@47
+core\remember.js               71 行  DAY@6  CUES@8  concreteScore@16  pickRecall@23  loadUsed@47  saveUsed@54  isRecallDue@64
+core\repair.js                 63 行  COOLDOWN@5  decideRepair@14  createRepairState@43
+core\resilience.js             36 行  BASELINE@4  resilience@11  recover@26
+core\rhythm.js                 24 行  rhythm@8
+core\ritual.js                 38 行  RITUALS@4  createRitual@12  minutesOfDay@15  check@21
+core\role.js                   24 行  roleOf@8
+core\selfdraft.mjs            163 行  EMOTION_TAG@10  TECH_NOISE@11  FILLER_HEAD@12  PARTICLES@13  BOOKISH@14  estimateStyle@43  styleLine@81  bareOf@104  pickSelfEvents@113  draftSelf@141
+core\signature.js              88 行  BASE@6  createSignatures@16
+core\social-emotion.js         31 行  socialEmotion@10
+core\speak.js                  40 行  decideSpeak@10
+core\speakers.js               44 行  createSpeakers@4  note@12  line@27
+core\store.js                  48 行  createStore@6
+core\storyline.js              34 行  PAST_Q@4  WHO_Q@6  loadStoryline@8  pickStoryline@26  PAST_QUESTION@33
+core\style.js                  63 行  PARTICLES@3  extractStyle@5  styleBias@32  selfBias@41  selfHints@55
+core\sublimate.js              19 行  sublimate@9
+core\suppress.js               24 行  suppress@9
+core\traitstat.js              66 行  createTracker@6
+core\trust.js                  18 行  trust@3
+core\unclear.js                28 行  ASK@4  unclearState@11
+core\values.js                 45 行  VALUES@5  prioritize@12  normCheck@20  BOTTOM@34  bottomLine@40
+core\worth.js                  56 行  BASELINE@4  PRAISE@5  CRITICISM@6  DECAY_PER_HOUR@7  FLOOR@8  CEIL@9  createWorth@14  settle@24  hit@34  value@43
+organs\acc.js                 126 行  DEFAULTS@6  create@15
+organs\mpfc.js                129 行  DEFAULTS@5  ADJ@15  create@23
+organs\ofc.js                 119 行  DEFAULTS@5  create@14
+organs\pcc.js                 123 行  DEFAULTS@6  create@17
+organs\str.js                 147 行  DEFAULTS@6  create@18
+organs\tpj.js                 111 行  DEFAULTS@5  SCRIPT@12  create@20
+bridge\affect.js               57 行  guard@4  createAffectBridge@13
+bridge\memory.js              164 行  EMOTION_TAG@11  readDiskEpisodes@19  createMemoryBridge@39
+tests\affects-mood.mjs        100 行  runPhrase@14
+tests\extract-fixture.mjs      50 行  FILES@4  N@38
+tests\fn-persona-air.mjs       32 行  
+tests\fn-persona-attach-trust-boundary.mjs   57 行  
+tests\fn-persona-autobio.mjs   57 行  DAY@6
+tests\fn-persona-avoid.mjs     37 行  
+tests\fn-persona-aware.mjs     40 行  
+tests\fn-persona-bias.mjs      33 行  
+tests\fn-persona-blame.mjs     37 行  
+tests\fn-persona-budget.mjs    34 行  
+tests\fn-persona-conflict-audit.mjs   40 行  
+tests\fn-persona-consistency.mjs   54 行  DAY@7
+tests\fn-persona-cooldown.mjs   54 行  BEHAVE@42
+tests\fn-persona-coverage.mjs   40 行  
+tests\fn-persona-crave.mjs     50 行  
+tests\fn-persona-cute.mjs      41 行  
+tests\fn-persona-deceive.mjs   42 行  
+tests\fn-persona-deny.mjs      38 行  
+tests\fn-persona-desc-extra.mjs   16 行  
+tests\fn-persona-desc-more.mjs   19 行  
+tests\fn-persona-desc-rules-safe.mjs   18 行  
+tests\fn-persona-desc-structural.mjs   22 行  
+tests\fn-persona-diversity.mjs   28 行  
+tests\fn-persona-efficacy.mjs   35 行  
+tests\fn-persona-empathy-retire-degrade.mjs   45 行  DAY@7
+tests\fn-persona-empathy.mjs   25 行  
+tests\fn-persona-expression-mindread-explain.mjs   49 行  DAY@8
+tests\fn-persona-fixed.mjs     81 行  
+tests\fn-persona-goal.mjs      51 行  
+tests\fn-persona-habit.mjs     50 行  DAY@6
+tests\fn-persona-humor.mjs     44 行  
+tests\fn-persona-ideal.mjs     35 行  
+tests\fn-persona-identity.mjs   50 行  
+tests\fn-persona-inject-depth.mjs   27 行  
+tests\fn-persona-integrate.mjs   51 行  
+tests\fn-persona-integration.mjs   82 行  CONFLICTS@46
+tests\fn-persona-interaction.mjs   28 行  
+tests\fn-persona-keyperiod.mjs   47 行  DAY@6
+tests\fn-persona-leak.mjs      34 行  
+tests\fn-persona-lexicon.mjs   33 行  
+tests\fn-persona-looks.mjs     16 行  
+tests\fn-persona-memory-wide.mjs   24 行  b@12
+tests\fn-persona-mode-route.mjs   75 行  SELF@54
+tests\fn-persona-modes.mjs     72 行  PERSONA@9  makeHome@11  boot@24
+tests\fn-persona-motive.mjs    38 行  
+tests\fn-persona-offline-e2e.mjs   55 行  
+tests\fn-persona-panel-fields.mjs   91 行  SENTINEL@14
+tests\fn-persona-panel-organs.mjs   29 行  
+tests\fn-persona-panel-state.mjs   65 行  
+tests\fn-persona-possess.mjs   42 行  
+tests\fn-persona-posture.mjs   39 行  
+tests\fn-persona-privacy-ostracism.mjs   59 行  
+tests\fn-persona-project.mjs   29 行  
+tests\fn-persona-recall-dedupe.mjs   17 行  DAY@3
+tests\fn-persona-recall-due.mjs    9 行  
+tests\fn-persona-recall-persist.mjs   22 行  
+tests\fn-persona-recall-quality.mjs   18 行  DAY@3
+tests\fn-persona-recall.mjs    24 行  DAY@3
+tests\fn-persona-reciprocity-major.mjs   51 行  DAY@7
+tests\fn-persona-relation-repair.mjs   39 行  
+tests\fn-persona-relation.mjs   44 行  
+tests\fn-persona-repair.mjs    46 行  
+tests\fn-persona-resilience-contagion.mjs   45 行  
+tests\fn-persona-rhythm.mjs    38 行  
+tests\fn-persona-ritual.mjs    58 行  
+tests\fn-persona-role.mjs      37 行  
+tests\fn-persona-self-concept.mjs   18 行  
+tests\fn-persona-selfbias.mjs    7 行  
+tests\fn-persona-selfhints.mjs    7 行  
+tests\fn-persona-social-emotions.mjs   55 行  
+tests\fn-persona-speak.mjs     38 行  
+tests\fn-persona-speakers.mjs   48 行  
+tests\fn-persona-state-route.mjs   68 行  REQUIRED@50
+tests\fn-persona-storyline-who.mjs   71 行  
+tests\fn-persona-sublimate.mjs   29 行  
+tests\fn-persona-suppress.mjs   33 行  
+tests\fn-persona-unclear.mjs   36 行  
+tests\fn-persona-values.mjs    39 行  
+tests\fn-persona-worth.mjs     52 行  HOUR@7
+tests\gen-index.mjs            28 行  RE@5  RE2@6
+tests\integration-memory.mjs   44 行  bridge@20  b2@36
+tests\lifecycle-50-organs.mjs  174 行  SELF@21  SCRIPT@69  JARGON@89  BEHAVE@90  STYLE@91
+tests\lifecycle-50.mjs        151 行  SCRIPT@36  JARGON@62  CONFLICTS@63  VOICE_ANCHOR@72  STYLE@73  BEHAVE@74
+tests\lifecycle.mjs           171 行  ROUNDS@8  UNIT@10  SIGNED@21  checkRange@26  fp@39  engine@47  dup@109  runAll@118  PROBES@130  NEUTRAL@138  seq@156
+tests\memory-link.mjs         111 行  fakeHip@20  ROWS@37
+tests\persona-hex-bias-modulate.mjs  100 行  
+tests\persona-ofc-warm.mjs    106 行  
+tests\persona-service.mjs      82 行  
+tests\persona-snapshot-restore.mjs   85 行  
+tests\persona-state-persists.mjs   87 行  
+tests\selftest.mjs            256 行  check@14
+tests\shared-beat.mjs         113 行  makeBus@21  makeCtx@40
+tests\smoke.mjs                36 行  
+client.js                      34 行  
+index.js                     1298 行  VERSION@80  apply@84  modulate@224  applySelfBias@256  retune@271  tick@304  text@627  health@1114  makeTool@1282
+panel.js                      435 行  DEFAULTS@15  createPanel@17  save@25  knobs@37  applyKnobs@47  extraText@53  snapshot@59  fmt@250  render@251  load@286  saveNow@290  json@338  readBody@344  register@353  resetKnobs@429

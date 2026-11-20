@@ -1,0 +1,4 @@
+# dsh-affect-core bundle layer.
+- insert:
+    - id: affect-core
+      name: dsh-affect-core

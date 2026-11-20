@@ -1,0 +1,23 @@
+{
+  "name": "dsh-persona",
+  "version": "2.1.0",
+  "description": "人格器官：六个结构（纹状体/前扣带/眶额/内侧前额叶/后扣带/颞顶联合）同帧协作，白纸、可养成。",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["index.js", "client.js", "panel.js", "core", "organs", "bridge", "tests", "cordis.patch.yml", "README.md"],
+  "scripts": { "test": "node tests/selftest.mjs", "smoke": "node tests/smoke.mjs" },
+  "license": "MIT",
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": ["@deepseek-ai/dsh-client-ui-settings"]
+    }
+  }
+}

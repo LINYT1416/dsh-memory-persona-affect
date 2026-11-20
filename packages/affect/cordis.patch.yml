@@ -1,0 +1,4 @@
+# dsh-affect bundle layer.
+- insert:
+    - id: affect
+      name: dsh-affect

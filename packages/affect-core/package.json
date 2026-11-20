@@ -1,0 +1,26 @@
+{
+  "name": "dsh-affect-core",
+  "version": "0.1.0",
+  "description": "情绪总控：唯一时钟、心跳事务、五路融合、注入文本、面板与 trace",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "contract.js",
+    "fuse.js",
+    "inject.js",
+    "store.js",
+    "trace.js",
+    "cordis.patch.yml"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
