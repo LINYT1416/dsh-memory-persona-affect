@@ -143,6 +143,18 @@ node packages/affect/tests/selftest.mjs
 - **冲突有了队列**：新旧事实打架时不自动选边，留给人裁决，全程可回溯
 - **全部自检重跑**：不依赖外网，不写真实数据
 
+## 加到插件市场里
+
+DSH 的插件市场是「读索引文件」的，索引放这儿：
+
+```
+https://raw.githubusercontent.com/LINYT1416/dsh-memory-persona-affect/main/market/index.json
+```
+
+打开 **设置 → 插件 → 发现 → 添加索引源**，把这个地址贴进去，就能在市场里看到这一条，点安装直接装 `dsh-memory-persona-affect@2.0.6`。
+
+索引文件本身在 [`market/index.json`](market/index.json)，按市场索引 format 1 写的；每个版本都声明了 `engines.dsh`，版本不兼容时会拒绝安装而不是装上去再崩。
+
 ## 许可
 
 MIT。见 [LICENSE](LICENSE)。引用请保留 **LINYT1416** 的署名。
