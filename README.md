@@ -67,7 +67,23 @@
 - 会**自己回血**：长时间没刺激、睡一觉，往基线回落，不会永远卡在低谷
 - 心情反过来调输出：句子变短、逗号变多、问句变少、表情包变多或变少
 
-## 装起来
+## 一行装走
+
+四个包已经打成一个，不用 npm，直接从 Release 装：
+
+```bash
+dsh plugin install https://github.com/LINYT1416/dsh-memory-persona-affect/releases/download/v2.0.0/dsh-memory-persona-affect-2.0.0.tgz
+```
+
+装完重启 DSH，记忆、人格、心情三个系统会一起挂上（`cordis.patch.yml` 里插了四条）。
+
+想跟着改源码，就用 Git 直连：
+
+```bash
+dsh plugin install https://codeload.github.com/LINYT1416/dsh-memory-persona-affect/tar.gz/refs/heads/main
+```
+
+## 装起来（手动）
 
 ```jsonc
 {
