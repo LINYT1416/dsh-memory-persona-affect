@@ -1,11 +1,7 @@
 MIT License
 
 Copyright (c) 2026 LINYT1416
-Copyright (c) 2026 大肥鱼（dsh-persona / dsh-affect / dsh-memory 作者）
-
-本项目由 **LINYT1416** 发起并维护。
-
-MIT License
+Copyright (c) 2026 大肥鱼
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +20,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## 关于作者
-
-- GitHub: [@LINYT1416](https://github.com/LINYT1416)
-- 项目：给 DSH（DeepSeek Harness）装上记忆、人格与心情的三件套
-
-引用本项目时请保留上方两行版权与本节署名。
